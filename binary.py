@@ -78,9 +78,9 @@ def main():
         user_input = user_input.zfill(5)
 
         if user_input == binary:
-            print("Correct!")
+            write("Correct!")
         else:
-            print("Incorrect.")
+            write("Incorrect.")
 
     write()
     write()
