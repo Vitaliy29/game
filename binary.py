@@ -1,6 +1,4 @@
 import random
-from browser import document, aio
-import asyncio
 
 
 def is_web():
@@ -9,6 +7,7 @@ def is_web():
 
 def write(message, end='\n'):
     if is_web():
+        from browser import document, aio
         console = document.getElementById('console')
         p = document.createElement('p')
         p.textContent = '> ' + message
@@ -20,6 +19,7 @@ def write(message, end='\n'):
 
 async def read():
     if is_web():
+        from browser import document, aio
         inp = document.getElementById('input')
         while True:
             event = await aio.event(inp, 'keydown')
@@ -34,8 +34,10 @@ async def read():
 
 def run(function):
     if is_web():
+        from browser import document, aio
         aio.run(function())
     else:
+        import asyncio
         asyncio.run(function())
 
 
@@ -49,11 +51,11 @@ def generate_binary():
     return binary, decimal
 
 
-def main():
+async def main():
     write(" " * 30 + "BINARY")
     write(" " * 15 + "CREATIVE COMPUTING  MORRISTOWN NEW JERSEY")
-    write()
-    write()
+    write("")
+    write("")
 
     for i in range(10):
         binary, decimal = generate_binary()
@@ -61,20 +63,20 @@ def main():
         for j in range(5):
             write(binary[j], end=" ")
         write("     DECIMAL:", end=" ")
-        user_input = int(read())
+        user_input = int(await read())
 
         if user_input == decimal:
             write("Correct!")
         else:
             write("Incorrect. The correct answer is:", decimal)
 
-    write()
-    write()
+    write("")
+    write("")
 
     for i in range(10):
         binary, decimal = generate_binary()
         write("DECIMAL:  ", decimal, end=" ")
-        user_input = read()("     BINARY:   ")
+        user_input = await read("     BINARY:   ")
         user_input = user_input.zfill(5)
 
         if user_input == binary:
@@ -82,15 +84,15 @@ def main():
         else:
             write("Incorrect.")
 
-    write()
-    write()
+    write("")
+    write("")
     t0 = 20
     for i in range(10):
         t0 -= 1
 
     write("YOUR SCORE:", int(t0 / 0.2 + 0.5), "%")
-    write()
-    write()
+    write("")
+    write("")
 
 
 run(main)
