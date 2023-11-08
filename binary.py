@@ -61,7 +61,7 @@ def main():
         for j in range(5):
             write(binary[j], end=" ")
         write("     DECIMAL:", end=" ")
-        user_input = int(input())
+        user_input = int(read())
 
         if user_input == decimal:
             write("Correct!")
@@ -74,13 +74,13 @@ def main():
     for i in range(10):
         binary, decimal = generate_binary()
         print("DECIMAL:  ", decimal, end=" ")
-        user_input = input("     BINARY:   ")
+        user_input = read()("     BINARY:   ")
         user_input = user_input.zfill(5)
 
         if user_input == binary:
-            write("Correct!")
+            print("Correct!")
         else:
-            write("Incorrect.")
+            print("Incorrect.")
 
     write()
     write()
